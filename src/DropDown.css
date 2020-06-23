@@ -1,0 +1,88 @@
+.DropDown {
+  margin-right: 1rem;
+  align-self: flex-start;
+}
+.DropDown-nav {
+  position: relative;
+  padding: 0.4rem;
+  width: 10rem;
+  box-shadow: -2px 2px 5px #b8b8b8;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.DropDown-nav .arrow {
+  background: none;
+  outline: none;
+  border: none;
+  margin-left: auto;
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition: 0.5s;
+}
+
+.arrow svg {
+  stroke: #a5a5a5;
+}
+
+.arrow.rotate {
+  transform: rotate(-180deg);
+}
+
+.DropDown-menu {
+  position: absolute;
+  top: 35px;
+  width: 10rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  overflow: hidden;
+  transition: height 0.4s ease-in-out;
+  z-index: 2;
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu-item {
+  height: 50px;
+  border-radius: 0.3em;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  transition: background 300ms;
+  text-decoration: none;
+  color: rgb(34, 34, 34);
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: #0000001a;
+}
+
+.icon-right {
+  margin-left: auto;
+}
+
+.menu-enter {
+  position: absolute;
+  transform: translate(0, -100%);
+}
+
+.menu-enter-active {
+  transform: translate(0, 0);
+  transition: all 300ms ease;
+}
+
+.menu-exit {
+  transform: translate(0, 0);
+  position: absolute;
+}
+
+.menu-exit-active {
+  transform: translateY(-100%);
+  transition: all 300ms ease;
+}

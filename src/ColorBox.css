@@ -1,0 +1,122 @@
+.ColorBox {
+  position: relative;
+  width: 20%;
+  height: 25%;
+  margin: 0 auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.SingleColorPalette .ColorBox {
+  height: 45%;
+}
+
+.ColorBox.goBack {
+  background-color: black;
+  color: white;
+  position: absolute;
+}
+
+.see-more {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 0.8rem;
+  padding: 0.2rem;
+}
+
+.copy-container {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.copy-button,
+.back-button {
+  opacity: 0;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 2rem;
+  padding: 0.1rem 1rem;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.back-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  text-decoration: none;
+  text-align: center;
+  opacity: 1;
+}
+
+.color-name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  letter-spacing: 1px;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.ColorBox:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100vh;
+  transition: all 0.6s ease-in-out;
+  z-index: 500;
+}
+.copy-overlay.show {
+  width: 100vw;
+}
+
+.copy-overlay-msg {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 4vw;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out 0.2s;
+}
+
+.copy-overlay-txt {
+  background: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  text-align: center;
+  padding: 0 5rem;
+  margin: 1rem;
+}
+
+.copy-overlay-msg.show {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.darkText {
+  color: rgb(27, 27, 27);
+  font-weight: 400;
+}
+
+.darkBg {
+  background: rgba(0, 0, 0, 0.3);
+}
