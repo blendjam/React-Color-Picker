@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/styles";
-import { CSSTransition } from "react-transition-group";
 import { ReactComponent as MenuIcon } from "./menu.svg";
+import { CSSTransition } from "react-transition-group";
 import { ReactComponent as ArrowIcon } from "./arrow.svg";
-import Button from "./Button";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import ColorPicker from "./ChromePicker";
+import NavForm from "./NavForm";
+import DrawerForm from "./DrawerForm";
 
 const drawerWidth = "400px";
 
@@ -26,6 +25,7 @@ const styles = {
     width: "100vw",
     height: "5vh",
     display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
     padding: "0 1rem",
   },
@@ -36,6 +36,9 @@ const styles = {
   },
 
   drawer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     position: "absolute",
     width: drawerWidth,
     height: "100vh",
@@ -76,32 +79,18 @@ const styles = {
 
 function SideBarwNavBar(props) {
   const [open, setOpen] = useState(true);
-  const [newColor, setColor] = useState("#fff");
-  const [name, setName] = useState("");
-  const { classes, addColor } = props;
+  const { classes } = props;
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule("isColorNameUnique", value =>
-      props.colorList.every(
-        ({ name }) => name.toLowerCase() !== value.toLowerCase()
-      )
-    );
-    ValidatorForm.addValidationRule("isColorUnique", value =>
-      props.colorList.every(({ color }) => color !== newColor)
-    );
-  });
-  const handleClick = e => {
+  const handleClick = () => {
     setOpen(!open);
   };
 
-  const addNewColor = () => {
-    addColor(newColor, name);
-    setName("");
-    setColor(null);
+  const handleSavePalette = paletteName => {
+    props.savePalette(paletteName);
   };
 
-  const handleChange = e => {
-    setName(e.target.value);
+  const clearPalette = () => {
+    props.clearPalette();
   };
 
   const shiftMain = open
@@ -119,34 +108,22 @@ function SideBarwNavBar(props) {
           <div className={classes.drawerTop}>
             <ArrowIcon onClick={handleClick} className={classes.ArrowIcon} />
           </div>
-          <h1>Design Your Palette</h1>
-          <div className={classes.buttons}>
-            <Button>Cler Palette</Button>
-            <Button>Random Color</Button>
-          </div>
-          <ColorPicker onChange={setColor} />
-          <ValidatorForm onSubmit={addNewColor}>
-            <TextValidator
-              value={name}
-              onChange={handleChange}
-              validators={["required", "isColorNameUnique", "isColorUnique"]}
-              errorMessages={[
-                "This filed is required",
-                "Enter Unique Name",
-                "Use Unique Color",
-              ]}
-            />
-            <Button color={newColor} type="submit">
-              Add Color
-            </Button>
-          </ValidatorForm>
+          <DrawerForm
+            clearPalette={clearPalette}
+            paletteList={props.paletteList}
+            addColor={props.addColor}
+            colorList={props.colorList}
+          />
         </div>
       </CSSTransition>
-      <div className={classes.navBar}>
-        {!open && (
-          <MenuIcon className={classes.MenuIcon} onClick={handleClick} />
-        )}
-      </div>
+      <nav className={classes.navBar}>
+        <MenuIcon className={classes.MenuIcon} onClick={handleClick} />
+        <NavForm
+          handleClick={handleClick}
+          handleSavePalette={handleSavePalette}
+          paletteList={props.paletteList}
+        />
+      </nav>
       <main style={shiftMain}>{props.children}</main>
     </div>
   );

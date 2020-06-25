@@ -1,0 +1,3 @@
+Roundtrip latency: 1.850ms
+Up: 947.0 Mbps
+Down: 1039.4 Mbps

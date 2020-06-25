@@ -43,6 +43,7 @@ class Palettelist extends Component {
   gotToPalette = id => {
     this.props.history.push(`/palette/${id}`);
   };
+
   render() {
     const { paletteList, classes } = this.props;
     const paletteDOM = paletteList.map(p => (

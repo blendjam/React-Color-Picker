@@ -34,7 +34,7 @@ class SingleColorPalette extends Component {
       shades.push(this.props.palette.colors[i].find(e => e.id === id));
     }
     return shades;
-  }
+  };
 
   changeColorFormat = colorFormat => {
     this.setState({ colorFormat });
@@ -61,7 +61,7 @@ class SingleColorPalette extends Component {
           <NavLink to="/" className="NavBar-logo">
             LOGO
           </NavLink>
-          <DropDown changeColorFormat={this.changeColorFomat} />
+          <DropDown changeColorFormat={this.changeColorFormat} />
         </NavBar>
         {colorBoxes}
         <div className="goBack ColorBox">
