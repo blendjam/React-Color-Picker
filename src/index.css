@@ -13,16 +13,22 @@
   font-weight: 300;
 }
 
+html,
 body {
-  height: 100vh;
+  height: 100%;
   background: var(--bg);
   color: var(--font);
+}
+
+#root {
+  height: 100%;
 }
 
 footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  height: 5vh;
 }
 
 footer p {

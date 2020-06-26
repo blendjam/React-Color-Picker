@@ -33,3 +33,24 @@
   margin: 0 0.5rem;
   font-weight: 500;
 }
+
+@media (max-width: 720px) {
+  .Slider {
+    width: 8rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .Slider {
+    width: 5rem;
+    height: 0.3rem;
+  }
+  .Slider::-webkit-slider-thumb {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+  .Slider-wrapper > p,
+  .Slider-wrapper .Slider-value {
+    font-size: 0.9rem;
+  }
+}

@@ -1,13 +1,56 @@
 import React, { Component } from "react";
 import ColorBox from "./ColorBox";
-import "./Palette.css";
 import NavBar from "./NavBar";
 import Dropdown from "./DropDown";
 import Slider from "./Slider";
 import Footer from "./Footer";
 import { NavLink } from "react-router-dom";
+import { withStyles } from '@material-ui/styles';
+import sizes from './sizes';
+import "./Palette.css";
 
-export default class Palette extends Component {
+const styles = {
+  root: {
+    height: "100%",
+
+    "& .ColorBox": {
+      [sizes.down('md')]: {
+        width: "50%",
+        height: "10%",
+      },
+
+      [sizes.down("xs")]: {
+        width: "100%",
+        height: "5%",
+      },
+    }
+  },
+
+  paletteContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignContent: "flex-start",
+    height: '87%',
+  },
+
+  Logo: {
+    margin: "0.3rem",
+    marginRight: "5rem",
+    background: " crimson",
+    color: "white",
+    textDecoration: "none",
+    fontWeight: 500,
+    display: "flex",
+    justifyContent: "cetner",
+    alignItems: "center",
+    padding: ".5rem",
+    [sizes.down("xs")]: {
+      display: "none",
+    }
+  }
+};
+
+class Palette extends Component {
   state = {
     level: 500,
     colorFormat: "hex",
@@ -23,7 +66,7 @@ export default class Palette extends Component {
 
   render() {
     const { level, colorFormat } = this.state;
-    const { palette } = this.props;
+    const { classes, palette } = this.props;
     const colorBoxes = palette.colors[level].map(c => (
       <ColorBox
         background={c[colorFormat]}
@@ -34,17 +77,19 @@ export default class Palette extends Component {
       />
     ));
     return (
-      <div className="Palette">
+      <div className={classes.root}>
         <NavBar>
-          <NavLink to="/" className="NavBar-logo">
+          <NavLink to="/" className={classes.Logo}>
             LOGO
           </NavLink>
           <Slider changeLevel={this.changeLevel} level={level} />
           <Dropdown changeColorFormat={this.changeColorFormat} />
         </NavBar>
-        <div className="Palette-colors">{colorBoxes}</div>
+        <div className={classes.paletteContainer}>{colorBoxes}</div>
         <Footer paletteName={palette.paletteName} emoji={palette.emoji} />
       </div>
     );
   }
 }
+
+export default withStyles(styles)(Palette);

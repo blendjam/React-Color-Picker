@@ -8,15 +8,37 @@ import Palettelist from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 
 class App extends React.Component {
-  state = {
-    palettes: [...seedColors],
-  };
+  constructor(props) {
+    super(props);
+
+    const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+
+    this.state = {
+      palettes: savedPalettes || seedColors,
+    };
+  }
+
   findPalette = id => {
     return this.state.palettes.find(palette => palette.id === id);
   };
 
   savePalette = newPalette => {
-    this.setState(st => ({ palettes: [...st.palettes, newPalette] }));
+    this.setState(
+      st => ({ palettes: [...st.palettes, newPalette] }),
+      this.syncLocalStorage
+    );
+  };
+
+  deletePalette = paletteId => {
+    const newPalettes = this.state.palettes.filter(e => e.id !== paletteId);
+    this.setState({ palettes: newPalettes }, this.syncLocalStorage);
+  };
+
+  syncLocalStorage = () => {
+    window.localStorage.setItem(
+      "palettes",
+      JSON.stringify(this.state.palettes)
+    );
   };
 
   render() {
@@ -26,7 +48,11 @@ class App extends React.Component {
           exact
           path="/"
           render={routeProps => (
-            <Palettelist paletteList={this.state.palettes} {...routeProps} />
+            <Palettelist
+              paletteList={this.state.palettes}
+              deletePalette={this.deletePalette}
+              {...routeProps}
+            />
           )}
         />
         <Route

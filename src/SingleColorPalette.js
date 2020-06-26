@@ -5,17 +5,89 @@ import DropDown from "./DropDown";
 import { NavLink } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import Footer from "./Footer";
+import sizes from "./sizes";
 
 const styles = {
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    height: "90vh",
+    height: "100%",
+    "& .ColorBox": {
+      height: "50%",
+
+      [sizes.down("md")]: {
+        height: "20%",
+        width: "50%",
+      },
+
+      [sizes.down("xs")]: {
+        width: "100%",
+        height: "10%",
+      },
+    },
+
+    "& footer": {
+      [sizes.down("xs")]: {
+        display: "none",
+      },
+    },
   },
 
-  color: {
+  paletteWrapper: {
+    height: "87%",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+    alignContent: "flex-start",
+
+    [sizes.down("xs")]: {
+      height: "92%",
+    },
+  },
+
+  goBack: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     height: "50%",
     width: "20%",
+    color: "white",
+    backgroundColor: "black",
+
+    "& a": {
+      fontWeight: "500",
+      fontSize: "2rem",
+      color: "white",
+      textDecoration: "none",
+      [sizes.down("xs")]: {
+        fontSize: "1.5rem",
+      },
+    },
+    [sizes.down("md")]: {
+      width: "50%",
+      height: "20%",
+    },
+
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "10%",
+    },
+  },
+
+  backBtn: {
+    padding: "0 1rem",
+    textAlign: "center",
+    backgroundColor: "rgba(255, 255, 255,0.2)",
+  },
+  Logo: {
+    margin: "0.3rem",
+    marginRight: "5rem",
+    background: " crimson",
+    color: "white",
+    textDecoration: "none",
+    fontWeight: 500,
+    display: "flex",
+    justifyContent: "cetner",
+    alignItems: "center",
+    padding: ".5rem",
   },
 };
 
@@ -34,7 +106,7 @@ class SingleColorPalette extends Component {
       shades.push(this.props.palette.colors[i].find(e => e.id === id));
     }
     return shades;
-  };
+  }
 
   changeColorFormat = colorFormat => {
     this.setState({ colorFormat });
@@ -56,18 +128,20 @@ class SingleColorPalette extends Component {
     });
 
     return (
-      <div className="SingleColorPalette Palette">
+      <div className={classes.root}>
         <NavBar>
-          <NavLink to="/" className="NavBar-logo">
+          <NavLink to="/" className={classes.Logo}>
             LOGO
           </NavLink>
           <DropDown changeColorFormat={this.changeColorFormat} />
         </NavBar>
-        {colorBoxes}
-        <div className="goBack ColorBox">
-          <NavLink to={`/palette/${palette.id}`} className="back-button">
-            Go Back
-          </NavLink>
+        <div className={classes.paletteWrapper}>
+          {colorBoxes}
+          <div className={classes.goBack}>
+            <NavLink to={`/palette/${palette.id}`} className={classes.backBtn}>
+              Go Back
+            </NavLink>
+          </div>
         </div>
         <Footer paletteName={palette.paletteName} emoji={palette.emoji} />
       </div>

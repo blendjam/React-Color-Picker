@@ -3,6 +3,7 @@ import Button from "./Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import ColorPicker from "./ChromePicker";
 import { withStyles } from "@material-ui/styles";
+import chroma from "chroma-js";
 
 const styles = {
   root: {
@@ -27,15 +28,15 @@ const styles = {
 
     "& button": {
       margin: "1rem auto",
-      color: "white",
     },
   },
 };
 
 function DrawerForm(props) {
   const { classes } = props;
-  const [newColor, setColor] = useState("#e5e5ee5");
+  const [newColor, setColor] = useState("#000000");
   const [colorName, setColorName] = useState("");
+  let fontColor = chroma(newColor).luminance() >= 0.4 ? "black" : "white";
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
@@ -52,14 +53,14 @@ function DrawerForm(props) {
   const addRandomColor = () => {
     const allColors = props.paletteList.map(p => p.colors).flat();
     const rand = allColors[Math.floor(Math.random() * allColors.length)];
-    setColor(rand.color);
+    setColor(rand.color.toLowerCase());
     setColorName(rand.name);
   };
 
   const addNewColor = () => {
     props.addColor(newColor, colorName);
     setColorName("");
-    setColor(null);
+    setColor("#ffffff");
   };
 
   const handleColorNameChange = e => {
@@ -101,7 +102,12 @@ function DrawerForm(props) {
             "Use Unique Color",
           ]}
         />
-        <Button color={newColor} disabled={isFull()} type="submit">
+        <Button
+          bgColor={newColor}
+          fontColor={fontColor}
+          color="transparent"
+          disabled={isFull()}
+          type="submit">
           {isFull() ? "Palette Full" : "Add Color"}
         </Button>
       </ValidatorForm>

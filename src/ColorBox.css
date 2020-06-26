@@ -2,8 +2,6 @@
   position: relative;
   width: 20%;
   height: 25%;
-  margin: 0 auto;
-  display: inline-block;
   cursor: pointer;
 }
 
@@ -45,17 +43,6 @@
   padding: 0.1rem 1rem;
   cursor: pointer;
   transition: 500ms;
-}
-
-.back-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: fit-content;
-  text-decoration: none;
-  text-align: center;
-  opacity: 1;
 }
 
 .color-name {
@@ -119,4 +106,10 @@
 
 .darkBg {
   background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 500px) {
+  .copy-button {
+    font-size: 1rem;
+  }
 }

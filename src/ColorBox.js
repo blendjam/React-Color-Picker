@@ -15,8 +15,6 @@ export default class ColorBox extends Component {
     });
   };
 
-  findLuminence = color => {};
-
   render() {
     const { name, background, moreUrl, showMore } = this.props;
     const showClass = this.state.isCopied ? "show" : "";

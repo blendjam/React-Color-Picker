@@ -1,20 +1,9 @@
-.NavBar{
-    display: flex;
-    align-items: center;
+.NavBar {
+  display: flex;
+  align-items: center;
+  height: 8vh;
 }
 
-.NavBar-logo{
-    margin: .3rem; 
-    margin-right: 5rem;
-    background: crimson;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: .5rem;
-}
 .DropDown {
-    margin-left: auto;
+  margin-left: auto;
 }

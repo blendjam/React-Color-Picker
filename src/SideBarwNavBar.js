@@ -3,8 +3,9 @@ import { withStyles } from "@material-ui/styles";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 import { CSSTransition } from "react-transition-group";
 import { ReactComponent as ArrowIcon } from "./arrow.svg";
-import NavForm from "./NavForm";
 import DrawerForm from "./DrawerForm";
+import NavMetaForm from "./NavMetaForm";
+import { NavLink } from "react-router-dom";
 
 const drawerWidth = "400px";
 
@@ -12,8 +13,8 @@ const styles = {
   root: {
     "& main": {
       position: "absolute",
-      top: "5vh",
-      height: "95vh",
+      top: "8vh",
+      height: "92vh",
       width: "100%",
       left: 0,
       transition: "left 300ms ease, width 300ms ease",
@@ -23,7 +24,7 @@ const styles = {
   navBar: {
     background: "#E5E5E5",
     width: "100vw",
-    height: "5vh",
+    height: "8vh",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -75,6 +76,17 @@ const styles = {
     cursor: "pointer",
     transform: "rotate(90deg)",
   },
+
+  back: {
+    fontFamily: "inherit",
+    color: "royalblue",
+    border: "2px solid royalblue",
+    margin: "0 1rem 0 auto",
+    padding: "0 .5rem",
+    textDecoration: "none",
+    borderRadius: "5px",
+    fontWeight: "500",
+  },
 };
 
 function SideBarwNavBar(props) {
@@ -85,8 +97,8 @@ function SideBarwNavBar(props) {
     setOpen(!open);
   };
 
-  const handleSavePalette = paletteName => {
-    props.savePalette(paletteName);
+  const handleSavePalette = (paletteName, emoji) => {
+    props.handleSavePalette(paletteName, emoji);
   };
 
   const clearPalette = () => {
@@ -118,7 +130,10 @@ function SideBarwNavBar(props) {
       </CSSTransition>
       <nav className={classes.navBar}>
         <MenuIcon className={classes.MenuIcon} onClick={handleClick} />
-        <NavForm
+        <NavLink to="/" className={classes.back}>
+          Back
+        </NavLink>
+        <NavMetaForm
           handleClick={handleClick}
           handleSavePalette={handleSavePalette}
           paletteList={props.paletteList}
