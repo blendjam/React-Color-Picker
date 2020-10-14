@@ -95,7 +95,7 @@ const styles = {
 
 class Palettelist extends Component {
   gotToPalette = id => {
-    this.props.history.push(`/palette/${id}`);
+    this.props.history.push(`${process.env.PUBLIC_URL}/palette/${id}`);
   };
 
   render() {
@@ -114,7 +114,7 @@ class Palettelist extends Component {
       <div className={classes.root}>
         <nav className={classes.nav}>
           <h1 className={classes.title}><span>React</span>Colors</h1>
-          <NavLink to="/palette/new"><span>Create Palette</span><PlusCircle /></NavLink>
+          <NavLink to={`${process.env.PUBLIC_URL}/palette/new`}><span>Create Palette</span><PlusCircle /></NavLink>
         </nav>
         <div className={classes.container}>
           <div className={classes.palettes}>{paletteDOM}</div>

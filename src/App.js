@@ -46,7 +46,7 @@ class App extends React.Component {
       <Switch>
         <Route
           exact
-          path="/"
+          path={process.env.PUBLIC_URL + "/"}
           render={routeProps => (
             <Palettelist
               paletteList={this.state.palettes}
@@ -57,7 +57,7 @@ class App extends React.Component {
         />
         <Route
           exact
-          path="/palette/new"
+          path={process.env.PUBLIC_URL + "/palette/new"}
           render={routeProps => (
             <NewPalette
               savePalette={this.savePalette}
@@ -68,7 +68,7 @@ class App extends React.Component {
         />
         <Route
           exact
-          path="/palette/:id"
+          path={process.env.PUBLIC_URL + "/palette/:id"}
           render={routeProps => (
             <Palette
               palette={generatePalette(
@@ -79,7 +79,7 @@ class App extends React.Component {
         />
         <Route
           exact
-          path="/palette/:paletteId/:colorId"
+          path={process.env.PUBLIC_URL + "/palette/:paletteId/:colorId"}
           render={routeProps => (
             <SingleColorPalette
               id={routeProps.match.params.colorId}

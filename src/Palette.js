@@ -73,13 +73,13 @@ class Palette extends Component {
         name={c.name}
         key={c.id}
         showMore={true}
-        moreUrl={`/palette/${palette.id}/${c.id}`}
+        moreUrl={`${process.env.PUBLIC_URL}/palette/${palette.id}/${c.id}`}
       />
     ));
     return (
       <div className={classes.root}>
         <NavBar>
-          <NavLink to="/" className={classes.Logo}>
+          <NavLink to={`${process.env.PUBLIC_URL}/`} className={classes.Logo}>
             LOGO
           </NavLink>
           <Slider changeLevel={this.changeLevel} level={level} />

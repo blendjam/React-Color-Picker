@@ -130,7 +130,7 @@ class SingleColorPalette extends Component {
     return (
       <div className={classes.root}>
         <NavBar>
-          <NavLink to="/" className={classes.Logo}>
+          <NavLink to={`${process.env.PUBLIC_URL}/`} className={classes.Logo}>
             LOGO
           </NavLink>
           <DropDown changeColorFormat={this.changeColorFormat} />
@@ -138,7 +138,7 @@ class SingleColorPalette extends Component {
         <div className={classes.paletteWrapper}>
           {colorBoxes}
           <div className={classes.goBack}>
-            <NavLink to={`/palette/${palette.id}`} className={classes.backBtn}>
+            <NavLink to={`${process.env.PUBLIC_URL}/palette/${palette.id}`} className={classes.backBtn}>
               Go Back
             </NavLink>
           </div>

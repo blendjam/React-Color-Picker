@@ -37,7 +37,7 @@ class NewPalette extends Component {
     };
 
     this.props.savePalette(newPlaette);
-    this.props.history.push("/");
+    this.props.history.push(`${process.env.PUBLIC_URL}/`);
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
