@@ -130,7 +130,7 @@ function SideBarwNavBar(props) {
       </CSSTransition>
       <nav className={classes.navBar}>
         <MenuIcon className={classes.MenuIcon} onClick={handleClick} />
-        <NavLink to="/" className={classes.back}>
+        <NavLink to={`${process.env.PUBLIC_URL}/`} className={classes.back}>
           Back
         </NavLink>
         <NavMetaForm
